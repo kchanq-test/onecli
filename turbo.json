@@ -1,0 +1,43 @@
+{
+  "$schema": "https://v2-7-6.turborepo.dev/schema.json",
+  "ui": "tui",
+  "globalEnv": ["NODE_ENV", "NEXT_PUBLIC_EDITION"],
+  "globalPassThroughEnv": [
+    "DATABASE_URL",
+    "NEXTAUTH_URL",
+    "NEXTAUTH_SECRET",
+    "NEXT_PUBLIC_COGNITO_USER_POOL_ID",
+    "NEXT_PUBLIC_COGNITO_CLIENT_ID",
+    "NEXT_PUBLIC_COGNITO_DOMAIN",
+    "AWS_REGION",
+    "NEXT_RUNTIME",
+    "STRIPE_SECRET_KEY",
+    "STRIPE_PRICE_ID",
+    "GOOGLE_CLIENT_ID",
+    "GOOGLE_CLIENT_SECRET",
+    "GITHUB_CLIENT_ID",
+    "GITHUB_CLIENT_SECRET",
+    "OAUTH_STATE_SECRET"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "lint:fix": {
+      "dependsOn": ["^lint:fix"],
+      "cache": false
+    },
+    "check-types": {
+      "dependsOn": ["^build", "^check-types"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

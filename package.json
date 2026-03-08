@@ -1,0 +1,41 @@
+{
+  "name": "onecli-cloud",
+  "private": true,
+  "scripts": {
+    "build": "dotenv -e .env -- turbo run build",
+    "dev": "dotenv -e .env -- turbo run dev",
+    "dev:web": "dotenv -e .env -- turbo run dev --filter=@onecli/web",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,md,css,json}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,md,css,json}\"",
+    "check-types": "turbo run check-types",
+    "check": "turbo run lint check-types && pnpm run format:check",
+    "fix": "turbo run lint:fix && pnpm run format",
+    "db:generate": "pnpm --filter @onecli/db prisma generate",
+    "db:push": "dotenv -e .env -- pnpm --filter @onecli/db prisma db push",
+    "db:migrate": "dotenv -e .env -- pnpm --filter @onecli/db db:migrate",
+    "db:init-dev": "pnpm --filter @onecli/db db:init-dev",
+    "db:studio": "dotenv -e .env -- pnpm --filter @onecli/db prisma studio",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^11.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.3.1",
+    "prettier": "^3.7.4",
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "turbo": "^2.8.3",
+    "typescript": "5.9.2"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "version": "0.1.0",
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,md,css,json}": [
+      "prettier --write"
+    ]
+  }
+}
